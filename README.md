@@ -98,7 +98,7 @@ Siga os passos abaixo para executar o projeto localmente.
 1.  **Clone o repositório:**
     ```sh
     git clone https://github.com/juliano-mesquita/408T-2025-S2-MINESWEEPER
-    cd minesweeper-flutter
+    cd 408T-2025-S2-MINESWEEPER
     ```
 
 2.  **Instale as dependências:**
