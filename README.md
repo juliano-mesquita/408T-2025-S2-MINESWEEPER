@@ -125,4 +125,4 @@ Distribuído sob a licença MIT. Veja `LICENSE` para mais informações.
 
 
 # 🤝 Regras de Contribuição
-Clique (aqui)[CONTRIBUTIONS.md]
+Clique [aqui](./CONTRIBUTIONS.md)
