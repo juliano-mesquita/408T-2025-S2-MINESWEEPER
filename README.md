@@ -27,7 +27,7 @@ O objetivo deste projeto é implementar a lógica completa do Campo Minado, segu
 * **Cronômetro e Contador:** Acompanhe seu progresso.
 * **Níveis de Dificuldade:** Configure o tamanho do tabuleiro e o número de minas.
 * **Detecção de Vitória/Derrota:** O jogo termina automaticamente ao encontrar uma mina ou revelar todas as células seguras.
-* **Responsivo:** (Opcional, se você implementou) Funciona em diferentes tamanhos de tela.
+* **Responsivo:** Funciona em diferentes tamanhos de tela. (Ainda Não)
 
 ## 🚀 Tecnologias Utilizadas
 
@@ -97,7 +97,7 @@ Siga os passos abaixo para executar o projeto localmente.
 
 1.  **Clone o repositório:**
     ```sh
-    git clone [https://github.com/seu-usuario/minesweeper-flutter.git](https://github.com/seu-usuario/minesweeper-flutter.git)
+    git clone https://github.com/juliano-mesquita/408T-2025-S2-MINESWEEPER
     cd minesweeper-flutter
     ```
 
