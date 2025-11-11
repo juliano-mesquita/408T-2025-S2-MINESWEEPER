@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minesweeper/pages/game_menu.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   runApp(const MainApp());
@@ -12,6 +13,15 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Menu do Jogo',
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('en'), // English
+        Locale('pt'), // Portuguese
+      ],
       theme: ThemeData(
         primarySwatch: Colors.grey,
         scaffoldBackgroundColor: Colors.grey,

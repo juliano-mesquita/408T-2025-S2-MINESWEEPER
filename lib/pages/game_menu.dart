@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:minesweeper/l10n/app_localizations.dart';
 import 'package:minesweeper/pages/game_page.dart';
 import 'package:minesweeper/pages/settings_page.dart';
 import 'package:minesweeper/pages/leaderboard_page.dart';
@@ -7,7 +8,7 @@ class GameMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Menu do jogo'), centerTitle: true),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.titleGameMenu), centerTitle: true),
       body: Center(
         child: SizedBox(
           width: MediaQuery.of(context).size.width * 0.5,
@@ -23,7 +24,7 @@ class GameMenu extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => GamePage()),
                     );
                   },
-                  child: const Text('Start Game'),
+                  child: Text(AppLocalizations.of(context)!.btnStartGame), // Start Game
                 ),
               ),
               SizedBox(
@@ -35,7 +36,7 @@ class GameMenu extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => SettingsPage()),
                     );
                   },
-                  child: const Text('Configurações'),
+                  child:  Text(AppLocalizations.of(context)!.btnSettings), // Configurações
                 ),
               ),
               SizedBox(
@@ -49,7 +50,7 @@ class GameMenu extends StatelessWidget {
                       ),
                     );
                   },
-                  child: const Text('Ranking'),
+                  child:  Text(AppLocalizations.of(context)!.btnRankings), //Ranking
                 ),
               ),
             ],

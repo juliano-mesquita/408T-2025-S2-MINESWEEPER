@@ -1,0 +1,12 @@
+{
+    
+  "titleGameMenu": "Game menu!",
+  "@titleGameMenu": {
+    "description": "The conventional newborn programmer greeting"
+  },
+
+  "btnStartGame": "Start game!",
+  "btnSettings": "Game Settings!",
+  "btnRankings": "Game Rankings!"
+
+}
