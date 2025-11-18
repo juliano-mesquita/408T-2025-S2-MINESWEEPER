@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:minesweeper/l10n/app_localizations.dart';
 
 class GamePage extends StatefulWidget {
   const GamePage({super.key});
@@ -13,10 +15,7 @@ class GamePageState extends State<GamePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Tabuleiro Células Fixas"),
-        centerTitle: true,
-      ),
+       appBar: AppBar(title: Text(AppLocalizations.of(context)!.titleBoard), centerTitle: true),
       body: LayoutBuilder(
         builder: (context, constraints) {
           double bottomPadding = 10;
@@ -24,10 +23,10 @@ class GamePageState extends State<GamePage> {
           double availableWidth = constraints.maxWidth;
           double availableHeight = constraints.maxHeight - bottomPadding;
 
-          int colunas = (availableWidth / cellSize).floor();
-          int linhas = (availableHeight / cellSize).floor();
+          int columns = (availableWidth / cellSize).floor();
+          int lines = (availableHeight / cellSize).floor();
 
-          int totalCelas = linhas * colunas;
+          int totalCells = lines * columns;
 
           return Padding(
             padding: EdgeInsets.only(bottom: bottomPadding),
@@ -35,10 +34,10 @@ class GamePageState extends State<GamePage> {
               padding: EdgeInsets.zero,
               physics: const NeverScrollableScrollPhysics(),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: colunas,
+                crossAxisCount: columns,
                 childAspectRatio: 1.0,
               ),
-              itemCount: totalCelas,
+              itemCount: totalCells,
               itemBuilder: (context, index) {
                 return Container(
                   decoration: BoxDecoration(
