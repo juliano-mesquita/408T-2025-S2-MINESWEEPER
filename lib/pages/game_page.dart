@@ -1,9 +1,13 @@
-
 import 'package:flutter/material.dart';
 
-class TabuleiroPage extends StatelessWidget {
-  const TabuleiroPage({super.key});
+class GamePage extends StatefulWidget {
+  const GamePage({super.key});
 
+  @override
+  State<StatefulWidget> createState() => GamePageState();
+}
+
+class GamePageState extends State<GamePage> {
   final double cellSize = 70;
 
   @override
