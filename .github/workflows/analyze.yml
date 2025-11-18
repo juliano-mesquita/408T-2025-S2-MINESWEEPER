@@ -1,4 +1,4 @@
-name: flutter-analyze-commenter example
+name: flutter-analyze-commenter
 
 on: pull_request  # Only supports run by pull request
 
