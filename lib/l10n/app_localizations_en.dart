@@ -19,4 +19,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get btnRankings => 'Game Rankings!';
+
+  @override
+  String get titleBoard => 'Board!';
 }

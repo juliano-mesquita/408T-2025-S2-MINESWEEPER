@@ -19,4 +19,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get btnRankings => 'Rankings!';
+
+  @override
+  String get titleBoard => 'Tabuleiro!';
 }

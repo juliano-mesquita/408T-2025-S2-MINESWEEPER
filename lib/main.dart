@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:minesweeper/l10n/app_localizations.dart';
 import 'package:minesweeper/pages/game_menu.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(const MyApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
