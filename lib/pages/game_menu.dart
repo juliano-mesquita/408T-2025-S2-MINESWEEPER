@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import 'package:minesweeper/controller/board_controller.dart';
 import 'package:minesweeper/l10n/app_localizations.dart';
 import 'package:minesweeper/pages/game_page.dart';
 import 'package:minesweeper/pages/settings_page.dart';
