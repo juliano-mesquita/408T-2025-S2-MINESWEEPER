@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter/cupertino.dart';
-
 class LeaderBoardPage extends StatefulWidget {
+  const LeaderBoardPage({super.key});
+
   @override
   State<StatefulWidget> createState() => LeaderboardPageState();
 }
