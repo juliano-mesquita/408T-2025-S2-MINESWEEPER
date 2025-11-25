@@ -1,43 +1,46 @@
-// import 'package:flutter/material.dart';
-// import 'package:minesweeper/pages/game_menu.dart';
-// import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:minesweeper/controller/board_controller.dart';
+import 'package:minesweeper/l10n/app_localizations.dart';
+import 'package:minesweeper/pages/game_menu.dart';
+import 'package:minesweeper/states/game_state.dart';
 
-// void main() {
-//   runApp(const MainApp());
-// }
+void main() {
+  registerDependencies();
+  runApp(const MyApp());
+}
 
-// class MainApp extends StatelessWidget {
-//   const MainApp({super.key});
+void registerDependencies() {
+  final getIt = GetIt.instance;
+  getIt.registerSingleton<GameState>(GameState());
+  getIt.registerSingleton<BoardController>(BoardController());
+}
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       localizationsDelegates: [
-//         GlobalMaterialLocalizations.delegate,
-//         GlobalWidgetsLocalizations.delegate,
-//         GlobalCupertinoLocalizations.delegate,
-//       ],
-//       supportedLocales: [
-//         Locale('en'), // English
-//         Locale('pt'), // Portuguese
-//       ],
-//       theme: ThemeData(
-//         primarySwatch: Colors.grey,
-//         scaffoldBackgroundColor: Colors.grey,
-//         colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
-//         // colorScheme: ColorScheme(
-//         //   brightness: Brightness.light,
-//         //   primary: Colors.green,
-//         //   secondary: Colors.red,
-//         //   onPrimary: Colors.black,
-//         //   onSecondary: Colors.teal,
-//         //   error: Colors.orange,
-//         //   onError: Colors.white,
-//         //   surface: Colors.blueGrey,
-//         //   onSurface: Colors.white,
-//         // ),
-//       ),
-//       home: GameMenu(),
-//     );
-//   }
-// }
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      theme: ThemeData(
+        primarySwatch: Colors.grey,
+        scaffoldBackgroundColor: Colors.grey,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
+        // colorScheme: ColorScheme(
+        //   brightness: Brightness.light,
+        //   primary: Colors.green,
+        //   secondary: Colors.red,
+        //   onPrimary: Colors.black,
+        //   onSecondary: Colors.teal,
+        //   error: Colors.orange,
+        //   onError: Colors.white,
+        //   surface: Colors.blueGrey,
+        //   onSurface: Colors.white,
+        // ),
+      ),
+      home: GameMenu(),
+    );
+  }
+}
