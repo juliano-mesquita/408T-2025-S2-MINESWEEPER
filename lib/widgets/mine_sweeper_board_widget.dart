@@ -2,8 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:minesweeper/controller/board_controller.dart';
+import 'package:minesweeper/models/cell_state.dart';
+import 'package:minesweeper/widget/cell_widget.dart';
 
-class MineSweeperBoardWidget extends StatelessWidget
+class MineSweeperBoardWidget extends StatefulWidget
 {
   final double cellSize;
 
@@ -11,6 +13,38 @@ class MineSweeperBoardWidget extends StatelessWidget
     super.key,
     this.cellSize = 70
   });
+  
+  @override
+  State<MineSweeperBoardWidget> createState() => _MineSweeperBoardWidgetState();
+}
+
+class _MineSweeperBoardWidgetState extends State<MineSweeperBoardWidget>
+{
+  Map<int, CellState> cellStates = {};
+
+  void toggleFlag(int index) {
+    setState(() {
+      if (cellStates[index] == null) {
+        cellStates[index] = CellState();
+      }
+      
+      if (!cellStates[index]!.isRevealed) {
+        cellStates[index]!.isFlagged = !cellStates[index]!.isFlagged;
+      }
+    });
+  }
+
+  void revealCell(int index) {
+    setState(() {
+      if (cellStates[index] == null) {
+        cellStates[index] = CellState();
+      }
+      
+      if (!cellStates[index]!.isFlagged) {
+        cellStates[index]!.isRevealed = true;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context)
@@ -22,8 +56,8 @@ class MineSweeperBoardWidget extends StatelessWidget
         double availableWidth = constraints.maxWidth;
         double availableHeight = constraints.maxHeight - bottomPadding;
 
-        int columns = (availableWidth / cellSize).floor();
-        int lines = (availableHeight / cellSize).floor();
+        int columns = (availableWidth / widget.cellSize).floor();
+        int lines = (availableHeight / widget.cellSize).floor();
 
         // TODO: Change to start game
         // TODO: Do not render board until game is initialized
@@ -43,11 +77,10 @@ class MineSweeperBoardWidget extends StatelessWidget
             ),
             itemCount: totalCells,
             itemBuilder: (context, index) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: Colors.blue[300],
-                  border: Border.all(color: Colors.white, width: 1),
-                ),
+              return CellWidget(
+                revealCell: () => revealCell(index),
+                toggleFlag: () => toggleFlag(index),
+                cellSize: widget.cellSize
               );
             },
           ),

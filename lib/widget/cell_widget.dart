@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:minesweeper/pages/flag.dart';
 
 class CellWidget extends StatelessWidget
 {
@@ -7,11 +6,16 @@ class CellWidget extends StatelessWidget
   final void Function() revealCell;
   final void Function() toggleFlag;
 
+  final bool isRevealed;
+  final bool isFlagged;
+
   const CellWidget({
     super.key,
     required this.revealCell,
     required this.toggleFlag,
-    required this.cellSize
+    required this.cellSize,
+    this.isFlagged = false,
+    this.isRevealed = false
   });
 
   @override
@@ -21,12 +25,12 @@ class CellWidget extends StatelessWidget
       onLongPress: toggleFlag,
       child: Container(
         decoration: BoxDecoration(
-          color: CellState().isRevealed 
+          color: isRevealed 
               ? Colors.grey[400] 
               : Colors.blue[300],
           border: Border.all(color: Colors.white, width: 1),
         ),
-        child: CellState().isFlagged
+        child: isFlagged
             ? Icon(
                 Icons.flag,
                 color: Colors.red,
