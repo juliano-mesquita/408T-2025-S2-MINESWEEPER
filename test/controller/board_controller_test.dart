@@ -167,18 +167,17 @@ void main() {
         expect(board.cellAt(1, 1).isRevealed, isTrue);
       });
 
-      // test('Não abre células fora dos limites', () {
-      //   final board = MinesweeperBoard(3, 3);
+      test('Não abre células fora dos limites', () {
+        boardController.initializeBoard(5, 5);
 
-      //   board.openCell(-1, -1); // Fora dos limites
-      //   board.openCell(3, 3); // Fora dos limites
+        final gameState = GetIt.instance.get<GameState>();
+        final board = gameState.board!;
 
-      //   for (var row in board.board) {
-      //     for (var cell in row) {
-      //       expect(cell.isOpen, isFalse);
-      //     }
-      //   }
-      // });
+        expect(
+          () => boardController.openAt(-1, -1),
+          throwsA(isA<AssertionError>()),
+        );
+      });
 
       test('verifica isOpened & isClosed 5x5', () {
         boardController.initializeBoard(5, 5);
@@ -280,18 +279,56 @@ void main() {
         // Verifica se as células adjacentes foram abertas
       });
 
-      // test('Não abre células com minas', () {
-      //   final board = MinesweeperBoard(3, 3);
+      test('Não abre células com minas', () {
+        boardController.initializeBoard(7, 10);
+        final gameState = GetIt.instance.get<GameState>();
 
-      //   // Adiciona uma mina
-      //   board.board[1][1].hasMine = true;
+        final board = gameState.board!;
 
-      //   // Tenta abrir a célula com mina
-      //   board.openCell(1, 1);
+        // Abre uma célula sem minas
+        //boardController.openAt(0, 0);
+        boardController.openAt(6, 6);
 
-      //   // Verifica se a célula não foi aberta
-      //   expect(board.board[1][1].isOpen, isFalse);
-      // });
+        for (int y = 0; y < board.height; y++) {
+          List<Cell> row = [];
+          for (int x = 0; x < board.width; x++) {
+            final cell = board.cellAt(x, y);
+            row.add(cell);
+          }
+          debugPrint(
+            '$y : ${row.map((cell) => !cell.isRevealed ? (cell.isBomb ? 'M' : 'X') : cell.adjacentBombs).join(' ')}',
+          );
+        }
+
+        final List<List<int>> expectedOpenedIndex = [
+          [6, 6],
+          [5, 5],
+          [6, 5],
+          [3, 6],
+          [4, 6],
+          [5, 6],
+          [3, 7],
+          [4, 7],
+          [5, 7],
+          [6, 7],
+          [3, 8],
+          [4, 8],
+          [5, 8],
+          [6, 8],
+          [3, 9],
+          [4, 9],
+          [5, 9],
+          [6, 9],
+        ];
+        for (int y = 0; y < board.height; y++) {
+          for (int x = 0; x < board.width; x++) {
+            final shouldBeReveleaed = expectedOpenedIndex.any(
+              (element) => element[0] == x && element[1] == y,
+            );
+            expect(board.cellAt(0, 1).isRevealed, isFalse);
+          }
+        }
+      });
     });
   });
 }
