@@ -76,6 +76,8 @@ class BoardController {
 
     // Update board data
     gameState.board = board;
+  }
+  
   void _openCell(Board board, int row, int col) {
     final rows = board.height;
     final cols = board.width;
