@@ -56,6 +56,31 @@ class BoardController
     gameState.board = board;
   }
 
+  void toggleFlagAt(int x, int y) {
+    final gameState = GetIt.instance.get<GameState>();
+
+    if (gameState.board == null) {
+      throw StateError('Board is not initialized');
+    }
+    
+    final board = gameState.board!;
+    assert(x >= 0 && x < board.width);
+    assert(y >= 0 && y < board.height);
+
+    final currentCell = board.cellAt(x, y);
+    
+    if (currentCell.isRevealed) {
+      return;
+    }
+
+    // Apenas alterna o estado da bandeira
+    final updatedCell = currentCell.copyWith(isFlagged: !currentCell.isFlagged);
+    board.setCellAt(x, y, updatedCell);
+
+    // Update board data
+    gameState.board = board;
+  }
+
   /// Places bombs ignoring [tappedX] and [tappedY]
   void _placeBombs(int tappedX, int tappedY)
   {

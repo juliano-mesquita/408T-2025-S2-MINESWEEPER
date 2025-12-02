@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:minesweeper/controller/board_controller.dart';
-import 'package:minesweeper/models/cell_state.dart';
+import 'package:minesweeper/states/game_state.dart';
 import 'package:minesweeper/widget/cell_widget.dart';
 
 class MineSweeperBoardWidget extends StatefulWidget
@@ -13,6 +13,8 @@ class MineSweeperBoardWidget extends StatefulWidget
     super.key,
     this.cellSize = 70
   });
+
+  
   
   @override
   State<MineSweeperBoardWidget> createState() => _MineSweeperBoardWidgetState();
@@ -20,30 +22,20 @@ class MineSweeperBoardWidget extends StatefulWidget
 
 class _MineSweeperBoardWidgetState extends State<MineSweeperBoardWidget>
 {
-  Map<int, CellState> cellStates = {};
+  final boardController = GetIt.instance.get<BoardController>();
+  final gameState = GetIt.instance.get<GameState>();  
 
   void toggleFlag(int index) {
-    setState(() {
-      if (cellStates[index] == null) {
-        cellStates[index] = CellState();
-      }
-      
-      if (!cellStates[index]!.isRevealed) {
-        cellStates[index]!.isFlagged = !cellStates[index]!.isFlagged;
-      }
-    });
+    // 1D(index) => 2D(x, y)
+    final x = index % gameState.board!.width;
+    final y = index ~/ gameState.board!.width;
+   boardController.toggleFlagAt(x, y);
   }
 
   void revealCell(int index) {
-    setState(() {
-      if (cellStates[index] == null) {
-        cellStates[index] = CellState();
-      }
-      
-      if (!cellStates[index]!.isFlagged) {
-        cellStates[index]!.isRevealed = true;
-      }
-    });
+    final x = index % gameState.board!.width;
+    final y = index ~/ gameState.board!.width;
+    boardController.openAt(x, y);
   }
 
   @override
