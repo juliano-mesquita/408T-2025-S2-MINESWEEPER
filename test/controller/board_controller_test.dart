@@ -171,8 +171,6 @@ void main() {
         boardController.initializeBoard(5, 5);
 
         final gameState = GetIt.instance.get<GameState>();
-        final board = gameState.board!;
-
         expect(
           () => boardController.openAt(-1, -1),
           throwsA(isA<AssertionError>()),
@@ -300,26 +298,6 @@ void main() {
           );
         }
 
-        final List<List<int>> expectedOpenedIndex = [
-          [6, 6],
-          [5, 5],
-          [6, 5],
-          [3, 6],
-          [4, 6],
-          [5, 6],
-          [3, 7],
-          [4, 7],
-          [5, 7],
-          [6, 7],
-          [3, 8],
-          [4, 8],
-          [5, 8],
-          [6, 8],
-          [3, 9],
-          [4, 9],
-          [5, 9],
-          [6, 9],
-        ];
         for (int y = 0; y < board.height; y++) {
           for (int x = 0; x < board.width; x++) {
             expect(board.cellAt(0, 1).isRevealed, isFalse);
