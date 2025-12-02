@@ -2,8 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:minesweeper/controller/board_controller.dart';
+import 'package:minesweeper/states/game_state.dart';
+import 'package:minesweeper/widget/cell_widget.dart';
 
-class MineSweeperBoardWidget extends StatelessWidget
+class MineSweeperBoardWidget extends StatefulWidget
 {
   final double cellSize;
 
@@ -11,6 +13,30 @@ class MineSweeperBoardWidget extends StatelessWidget
     super.key,
     this.cellSize = 70
   });
+
+  
+  
+  @override
+  State<MineSweeperBoardWidget> createState() => _MineSweeperBoardWidgetState();
+}
+
+class _MineSweeperBoardWidgetState extends State<MineSweeperBoardWidget>
+{
+  final boardController = GetIt.instance.get<BoardController>();
+  final gameState = GetIt.instance.get<GameState>();  
+
+  void toggleFlag(int index) {
+    // 1D(index) => 2D(x, y)
+    final x = index % gameState.board!.width;
+    final y = index ~/ gameState.board!.width;
+   boardController.toggleFlagAt(x, y);
+  }
+
+  void revealCell(int index) {
+    final x = index % gameState.board!.width;
+    final y = index ~/ gameState.board!.width;
+    boardController.openAt(x, y);
+  }
 
   @override
   Widget build(BuildContext context)
@@ -22,8 +48,8 @@ class MineSweeperBoardWidget extends StatelessWidget
         double availableWidth = constraints.maxWidth;
         double availableHeight = constraints.maxHeight - bottomPadding;
 
-        int columns = (availableWidth / cellSize).floor();
-        int lines = (availableHeight / cellSize).floor();
+        int columns = (availableWidth / widget.cellSize).floor();
+        int lines = (availableHeight / widget.cellSize).floor();
 
         // TODO: Change to start game
         // TODO: Do not render board until game is initialized
@@ -43,11 +69,10 @@ class MineSweeperBoardWidget extends StatelessWidget
             ),
             itemCount: totalCells,
             itemBuilder: (context, index) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: Colors.blue[300],
-                  border: Border.all(color: Colors.white, width: 1),
-                ),
+              return CellWidget(
+                revealCell: () => revealCell(index),
+                toggleFlag: () => toggleFlag(index),
+                cellSize: widget.cellSize
               );
             },
           ),
