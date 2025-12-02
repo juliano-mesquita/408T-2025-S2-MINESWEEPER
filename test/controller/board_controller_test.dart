@@ -170,7 +170,6 @@ void main() {
       test('Não abre células fora dos limites', () {
         boardController.initializeBoard(5, 5);
 
-        final gameState = GetIt.instance.get<GameState>();
         expect(
           () => boardController.openAt(-1, -1),
           throwsA(isA<AssertionError>()),
