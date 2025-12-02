@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:minesweeper/models/board.dart';
 import 'package:minesweeper/models/cell.dart';
 import 'package:minesweeper/states/game_state.dart';
+import 'package:minesweeper/states/game_working_state.dart';
 
 class BoardController
 {
@@ -32,6 +33,7 @@ class BoardController
     );
 
     gameState.board = board;
+    gameState.gameWorkingState = GameWorkingState.playing;
   }
 
   /// Starts opening the board at position [x], [y]
