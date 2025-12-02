@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:minesweeper/models/board.dart';
+import 'package:minesweeper/states/game_working_state.dart';
 
 class GameState extends ChangeNotifier
 {
@@ -19,6 +20,16 @@ class GameState extends ChangeNotifier
   set hasHadFirstTap(bool value)
   {
     _hasHadFirstTap = value;
+    notifyListeners();
+  }
+
+  GameWorkingState _gameWorkingState = GameWorkingState.notStarted;
+
+  GameWorkingState get gameWorkingState => _gameWorkingState;
+
+  set gameWorkingState(GameWorkingState state)
+  {
+    _gameWorkingState = state;
     notifyListeners();
   }
 }
