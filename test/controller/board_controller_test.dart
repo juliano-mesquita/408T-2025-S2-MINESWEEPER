@@ -300,7 +300,9 @@ void main() {
 
         for (int y = 0; y < board.height; y++) {
           for (int x = 0; x < board.width; x++) {
-            expect(board.cellAt(0, 1).isRevealed, isFalse);
+            if (board.cellAt(x, y).isBomb) {
+              expect(board.cellAt(x, y).isRevealed, isFalse);
+            }
           }
         }
       });
