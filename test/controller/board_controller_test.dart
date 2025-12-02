@@ -322,9 +322,6 @@ void main() {
         ];
         for (int y = 0; y < board.height; y++) {
           for (int x = 0; x < board.width; x++) {
-            final shouldBeReveleaed = expectedOpenedIndex.any(
-              (element) => element[0] == x && element[1] == y,
-            );
             expect(board.cellAt(0, 1).isRevealed, isFalse);
           }
         }
