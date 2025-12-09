@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:minesweeper/models/board.dart';
 import 'package:minesweeper/states/game_working_state.dart';
+import 'package:minesweeper/states/timer_state.dart';
 
 class GameState extends ChangeNotifier
 {
@@ -30,6 +31,17 @@ class GameState extends ChangeNotifier
   set gameWorkingState(GameWorkingState state)
   {
     _gameWorkingState = state;
+    notifyListeners();
+  }
+
+  //TODO TimerValue
+  TimerState _timerState = TimerState();
+
+  TimerState get timerState => _timerState;
+
+  set timerState(TimerState state)
+  {
+    _timerState = state;
     notifyListeners();
   }
 }

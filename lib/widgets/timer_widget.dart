@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
+import 'package:minesweeper/states/game_state.dart';
+import 'package:minesweeper/states/timer_state.dart';
 
-class TimerWidget extends StatefulWidget {
+import 'package:watch_it/watch_it.dart';
+
+class TimerWidget extends StatefulWidget with WatchItStatefulWidgetMixin  {
   const TimerWidget({super.key});
 
   @override
@@ -9,45 +12,24 @@ class TimerWidget extends StatefulWidget {
 }
 
 class _TimerWidgetState extends State<TimerWidget> {
-  Timer? _timer;
-  int _segundosDecorridos = 0;
 
-  @override
-  void initState() {
-    super.initState();
-    _iniciarTimer();
-  }
-
-  void _iniciarTimer() {
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (mounted) {
-        setState(() {
-          _segundosDecorridos++;
-        });
-      }
-    });
-  }
-
-  String _getTempoFormatado() {
-    int minutos = _segundosDecorridos ~/ 60;
-    int segundos = _segundosDecorridos % 60;
-    return '${minutos.toString().padLeft(2, '0')}:${segundos.toString().padLeft(2, '0')}';
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
+  String _getTimeFormatted(int seconds) {
+    int minutes = seconds ~/ 60;
+    int secs = seconds % 60;
+    return '${minutes.toString().padLeft(2, '0')}:${secs.toString().padLeft(2, '0')}';
   }
 
   @override
   Widget build(BuildContext context) {
+    final timerState = watchPropertyValue<GameState, TimerState>(
+      (state) => state.timerState
+    );
     return Row(
       children: [
         const Icon(Icons.timer, color: Colors.blue),
         const SizedBox(width: 8),
         Text(
-          _getTempoFormatado(),
+          _getTimeFormatted(timerState.secs),
           style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
       ],
