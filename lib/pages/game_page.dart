@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:minesweeper/l10n/app_localizations.dart';
 import 'package:minesweeper/widgets/timer_widget.dart';
-
+import 'package:minesweeper/widgets/mine_sweeper_board_widget.dart';
 
 class GamePage extends StatefulWidget {
   const GamePage({super.key});
@@ -11,7 +11,6 @@ class GamePage extends StatefulWidget {
 }
 
 class GamePageState extends State<GamePage> {
-  final double cellSize = 70;
 
  
 
@@ -48,43 +47,7 @@ class GamePageState extends State<GamePage> {
               ],
             ),
           ),
-
-          Expanded(
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                double bottomPadding = 10;
-
-                double availableWidth = constraints.maxWidth;
-                double availableHeight = constraints.maxHeight - bottomPadding;
-
-                int columns = (availableWidth / cellSize).floor();
-                int lines = (availableHeight / cellSize).floor();
-
-                int totalCells = lines * columns;
-
-                return Padding(
-                  padding: EdgeInsets.only(bottom: bottomPadding),
-                  child: GridView.builder(
-                    padding: EdgeInsets.zero,
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: columns,
-                      childAspectRatio: 1.0,
-                    ),
-                    itemCount: totalCells,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: Colors.blue[300],
-                          border: Border.all(color: Colors.white, width: 1),
-                        ),
-                      );
-                    },
-                  ),
-                );
-              },
-            ),
-          ),
+          Expanded(child: MineSweeperBoardWidget())
         ],
       ),
     );
