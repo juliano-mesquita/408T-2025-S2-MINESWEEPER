@@ -22,4 +22,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get titleBoard => 'Tabuleiro!';
+   
+   @override
+   String get titleLeaderboardPageState => 'Ranking!';
 }

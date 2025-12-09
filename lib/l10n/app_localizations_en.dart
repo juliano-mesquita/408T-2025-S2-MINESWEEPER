@@ -22,4 +22,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get titleBoard => 'Board!';
+
+   @override
+  String get titleLeaderboardPageState => 'Ranking!';
 }

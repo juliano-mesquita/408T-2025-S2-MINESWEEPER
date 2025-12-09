@@ -127,6 +127,8 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Board!'**
   String get titleBoard;
+
+  String get titleLeaderboardPageState;
 }
 
 class _AppLocalizationsDelegate
