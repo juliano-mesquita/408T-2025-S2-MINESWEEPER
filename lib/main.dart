@@ -10,11 +10,11 @@ void main() {
   runApp(const MyApp());
 }
 
-void registerDependencies()
-{
+void registerDependencies() {
   final getIt = GetIt.instance;
   getIt.registerSingleton<GameState>(GameState());
   getIt.registerSingleton<BoardController>(BoardController());
+  //TODO: Register settingsController & call init
 }
 
 class MyApp extends StatelessWidget {
