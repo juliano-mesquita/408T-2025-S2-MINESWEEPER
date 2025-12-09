@@ -1,4 +1,4 @@
 class TimerState {
-  int segundos = 0;
-  bool estaRodando = false;
+  int secs = 0;
+  bool isRunning = false;
 }
