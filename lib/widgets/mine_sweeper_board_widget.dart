@@ -77,10 +77,19 @@ class MineSweeperBoardWidgetState extends State<MineSweeperBoardWidget>
               ),
               itemCount: totalCells,
               itemBuilder: (context, index) {
+                final x = index % board.width;
+                final y = index ~/ board.width;
+
+                final cell = board.cellAt(x, y);
+
                 return CellWidget(
                   revealCell: () => revealCell(index),
                   toggleFlag: () => toggleFlag(index),
-                  cellSize: widget.cellSize
+                  cellSize: widget.cellSize,
+                  isRevealed:cell.isRevealed,
+                  isFlagged: cell.isFlagged,
+                  neighborMines: cell.adjacentBombs,
+                  hasMine: cell.isBomb,
                 );
               },
             ),
