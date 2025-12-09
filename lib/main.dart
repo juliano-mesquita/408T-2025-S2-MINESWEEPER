@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:minesweeper/controller/board_controller.dart';
+import 'package:minesweeper/controller/game_controller.dart';
 import 'package:minesweeper/l10n/app_localizations.dart';
 import 'package:minesweeper/pages/game_menu.dart';
 import 'package:minesweeper/states/game_state.dart';
@@ -14,6 +15,7 @@ void registerDependencies() {
   final getIt = GetIt.instance;
   getIt.registerSingleton<GameState>(GameState());
   getIt.registerSingleton<BoardController>(BoardController());
+  getIt.registerSingleton<GameController>(GameController());
 }
 
 class MyApp extends StatelessWidget {
