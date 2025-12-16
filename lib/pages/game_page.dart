@@ -19,22 +19,26 @@ class GamePageState extends State<GamePage> {
   final gameState = GetIt.instance.get<GameState>();
 
   @override
-  void dispose()
-  {
+  void dispose() {
     super.dispose();
     gameController.finishGame();
   }
-  
+
   @override
   Widget build(BuildContext context) {
-    final gameState = watchPropertyValue<GameState, GameWorkingState>((state) => state.gameWorkingState);
+    final gameState = watchPropertyValue<GameState, GameWorkingState>(
+      (state) => state.gameWorkingState,
+    );
     return Scaffold(
       body: Stack(
         children: [
           Column(
             children: [
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 10,
+                ),
                 color: Colors.grey[200],
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,7 +49,7 @@ class GamePageState extends State<GamePage> {
                         Navigator.of(context).pop();
                       },
                       icon: const Icon(Icons.exit_to_app),
-                      label: const Text("Sair"),
+                      label: Text(AppLocalizations.of(context)!.btnGoMainMenu),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.redAccent,
                         foregroundColor: Colors.white,
@@ -54,12 +58,10 @@ class GamePageState extends State<GamePage> {
                   ],
                 ),
               ),
-              Expanded(
-                child: MineSweeperBoardWidget()
-              )
+              Expanded(child: MineSweeperBoardWidget()),
             ],
           ),
-          if(gameState == GameWorkingState.gameOver)
+          if (gameState == GameWorkingState.gameOver)
             Container(
               color: Colors.black.withValues(alpha: 0.5),
               child: Center(
@@ -79,12 +81,12 @@ class GamePageState extends State<GamePage> {
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                    )
+                    ),
                   ],
-                )
+                ),
               ),
             ),
-          if(gameState == GameWorkingState.victory)
+          if (gameState == GameWorkingState.victory)
             Container(
               color: Colors.green.withValues(alpha: 0.5),
               child: Center(
@@ -104,11 +106,11 @@ class GamePageState extends State<GamePage> {
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                    )
+                    ),
                   ],
-                )
+                ),
               ),
-            )
+            ),
         ],
       ),
     );
