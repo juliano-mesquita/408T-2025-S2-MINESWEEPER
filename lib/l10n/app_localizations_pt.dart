@@ -46,4 +46,5 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get labelSettings => 'Configurações';
+  String get btnLeave => 'Sair';
 }
