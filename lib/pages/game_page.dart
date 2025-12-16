@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:minesweeper/controller/game_controller.dart';
 import 'package:minesweeper/l10n/app_localizations.dart';
+import 'package:minesweeper/repository/settings_repository.dart';
 import 'package:minesweeper/states/game_state.dart';
 import 'package:minesweeper/states/game_working_state.dart';
 import 'package:minesweeper/widgets/timer_widget.dart';
@@ -28,6 +29,12 @@ class GamePageState extends State<GamePage> {
   @override
   Widget build(BuildContext context) {
     final gameState = watchPropertyValue<GameState, GameWorkingState>((state) => state.gameWorkingState);
+    final gameDifficulty = watchPropertyValue<GameState, GameDifficulty>((state) => state.gameDifficulty);
+    final cellSize = switch (gameDifficulty) {
+      GameDifficulty.easy => 100.0,
+      GameDifficulty.medium => 70.0,
+      GameDifficulty.hard => 40.0,
+    };
     return Scaffold(
       body: Stack(
         children: [
@@ -55,7 +62,7 @@ class GamePageState extends State<GamePage> {
                 ),
               ),
               Expanded(
-                child: MineSweeperBoardWidget()
+                child: MineSweeperBoardWidget(cellSize: cellSize)
               )
             ],
           ),

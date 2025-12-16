@@ -4,14 +4,17 @@ import 'package:minesweeper/models/cell.dart';
 import 'package:minesweeper/states/game_state.dart';
 import 'package:minesweeper/states/game_working_state.dart';
 import 'package:minesweeper/states/timer_state.dart';
+import 'package:minesweeper/repository/settings_repository.dart';
 
 class GameController {
   final state = GetIt.instance.get<GameState>();
-  
+  final settingsRepository = GetIt.instance.get<SettingsRepository>();
   Timer? _timer;
 
-  void init()
+  Future<void> init() async
   {
+    final difficulty = await settingsRepository.loadDifficulty();
+    state.gameDifficulty = difficulty;
     state.addListener(_onGameStateUpdate);
   }
 
@@ -120,5 +123,11 @@ class GameController {
     {
       state.gameWorkingState = GameWorkingState.victory;
     }
+  }
+
+  Future<void> setDifficulty(GameDifficulty difficulty) async
+  {
+    await settingsRepository.saveDifficulty(difficulty);
+    state.gameDifficulty = difficulty;
   }
 }
