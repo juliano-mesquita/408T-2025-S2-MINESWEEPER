@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:minesweeper/l10n/app_localizations.dart';
 import 'package:minesweeper/pages/game_page.dart';
 import 'package:minesweeper/pages/settings_page.dart';
-import 'package:minesweeper/pages/leaderboard_page.dart';
 
 class GameMenu extends StatelessWidget {
   const GameMenu({super.key});
@@ -40,20 +39,6 @@ class GameMenu extends StatelessWidget {
                     );
                   },
                   child:  Text(AppLocalizations.of(context)!.btnSettings), // Configurações
-                ),
-              ),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => LeaderBoardPage(),
-                      ),
-                    );
-                  },
-                  child:  Text(AppLocalizations.of(context)!.btnRankings), //Ranking
                 ),
               ),
             ],
