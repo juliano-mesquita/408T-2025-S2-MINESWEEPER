@@ -8,6 +8,7 @@ import 'package:minesweeper/states/game_state.dart';
 import 'package:minesweeper/repository/settings_repository.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await registerDependencies();
   runApp(const MyApp());
 }
@@ -17,15 +18,11 @@ Future<void> registerDependencies() async {
   getIt.registerSingleton<GameState>(GameState());
   getIt.registerSingleton<BoardController>(BoardController());
   getIt.registerSingleton<SettingsRepository>(SettingsRepository());
-  getIt.registerSingletonAsync<GameController>(
-    () async
-    {
-      final instance = GameController();
-      await instance.init();
-      return instance;
-    },
-    dispose: (instance) => instance.dispose(),
-  );
+  getIt.registerSingletonAsync<GameController>(() async {
+    final instance = GameController();
+    await instance.init();
+    return instance;
+  }, dispose: (instance) => instance.dispose());
   await getIt.allReady();
 }
 

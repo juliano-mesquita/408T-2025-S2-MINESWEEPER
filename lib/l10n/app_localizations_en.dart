@@ -34,4 +34,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get labelDifficultyHard => 'Hard';
+
+  @override
+  String get labelDifficultyMedium => 'Medium';
+
+  @override
+  String get labelDifficultyEasy => 'Easy';
+
+  @override
+  String get labelDifficultySelector => 'Select the difficulty level';
+
+  @override
+  String get labelSettings => 'Settings';
 }

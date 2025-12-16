@@ -151,6 +151,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Hard'**
   String get labelDifficultyHard;
+
+  /// No description provided for @labelDifficultyMedium.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get labelDifficultyMedium;
+
+  /// No description provided for @labelDifficultyEasy.
+  ///
+  /// In en, this message translates to:
+  /// **'Easy'**
+  String get labelDifficultyEasy;
+
+  /// No description provided for @labelDifficultySelector.
+  ///
+  /// In en, this message translates to:
+  /// **'Select the difficulty level'**
+  String get labelDifficultySelector;
+
+  /// No description provided for @labelSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get labelSettings;
 }
 
 class _AppLocalizationsDelegate

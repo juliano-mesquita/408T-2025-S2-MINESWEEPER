@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:minesweeper/controller/game_controller.dart';
 import 'package:minesweeper/l10n/app_localizations.dart';
 import 'package:minesweeper/repository/settings_repository.dart';
+import 'package:minesweeper/states/game_state.dart';
+import 'package:watch_it/watch_it.dart';
 
-class SettingsPage extends StatefulWidget {
+class SettingsPage extends StatefulWidget with WatchItStatefulWidgetMixin {
   const SettingsPage({super.key});
 
   @override
@@ -10,40 +13,22 @@ class SettingsPage extends StatefulWidget {
 }
 
 class SettingsPageState extends State<SettingsPage> {
-  final SettingsRepository _settingsRepository = SettingsRepository();
-  GameDifficulty _selectedGameDifficulty = GameDifficulty.easy;
-  List<bool> get _selectedDifficulty => GameDifficulty.values
-      .map((difficulty) => difficulty == _selectedGameDifficulty)
-      .toList();
-
-  @override
-  void initState() {
-    super.initState();
-    _loadSelectedDifficulty(); //carregar a dificuldade salva
-  }
-
-  Future<void> _loadSelectedDifficulty() async {
-    final savedDifficulty = await _settingsRepository.loadDifficulty();
-    setState(() {
-      _selectedGameDifficulty = savedDifficulty;
-    });
-  }
-
-  void _saveSelectedDifficulty(int index) {
-    setState(() {
-      for (int i = 0; i < _selectedDifficulty.length; i++) {
-        _selectedDifficulty[i] = i == index;
-      }
-    });
-
-    // Salva a dificuldade selecionada
-    _settingsRepository.saveDifficulty(GameDifficulty.values[index]);
-  }
+  final gameController = GetIt.instance.get<GameController>();
 
   @override
   Widget build(BuildContext context) {
+    final gameDifficulty = watchPropertyValue<GameState, GameDifficulty>(
+      (state) => state.gameDifficulty,
+    );
+    final selectedDifficulty = GameDifficulty.values
+        .map((difficulty) => difficulty == gameDifficulty)
+        .toList();
+
     return Scaffold(
-      appBar: AppBar(title: Text('Configrações'), centerTitle: true),
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.labelSettings),
+        centerTitle: true,
+      ),
       body: Center(
         child: SizedBox(
           width: MediaQuery.of(context).size.width * 0.5,
@@ -53,7 +38,7 @@ class SettingsPageState extends State<SettingsPage> {
               SizedBox(
                 width: double.infinity,
                 child: Text(
-                  'Selecione o Nível de Dificuldade',
+                  AppLocalizations.of(context)!.labelDifficultySelector,
                   style: TextStyle(fontSize: 20),
                   textAlign: TextAlign.center,
                 ),
@@ -64,11 +49,7 @@ class SettingsPageState extends State<SettingsPage> {
                 child: ToggleButtons(
                   direction: Axis.vertical,
                   onPressed: (int index) {
-                    setState(() {
-                      _selectedGameDifficulty = GameDifficulty.values[index];
-                    });
-
-                    _saveSelectedDifficulty(index);
+                    gameController.setDifficulty(GameDifficulty.values[index]);
                   },
                   borderRadius: const BorderRadius.all(Radius.circular(8)),
                   selectedBorderColor: Colors.red[700],
@@ -79,13 +60,19 @@ class SettingsPageState extends State<SettingsPage> {
                     minHeight: 40.0,
                     minWidth: 90.0,
                   ),
-                  isSelected: _selectedDifficulty,
+                  isSelected: selectedDifficulty,
                   children: GameDifficulty.values
                       .map(
                         (difficulty) => Text(switch (difficulty) {
-                          GameDifficulty.medium => 'Médio',
-                          GameDifficulty.hard => 'Difícil',
-                          GameDifficulty.easy => 'Fácil',
+                          GameDifficulty.medium => AppLocalizations.of(
+                            context,
+                          )!.labelDifficultyMedium,
+                          GameDifficulty.hard => AppLocalizations.of(
+                            context,
+                          )!.labelDifficultyHard,
+                          GameDifficulty.easy => AppLocalizations.of(
+                            context,
+                          )!.labelDifficultyEasy,
                         }),
                       )
                       .toList(),

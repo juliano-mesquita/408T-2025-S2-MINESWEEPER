@@ -11,5 +11,15 @@
 
     "titleVictory": "Victory",
 
-    "labelDifficultyHard": "Díficil"
+    "labelDifficultyHard": "Díficil",
+
+    "labelDifficultyMedium": "Médio",
+
+    "labelDifficultyEasy": "Fácil",
+
+    "labelDifficultySelector": "Selecione o Nível de Dificuldade",
+
+    "labelSettings": "Configurações"
+
+
 }
