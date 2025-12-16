@@ -125,10 +125,34 @@ class BoardController {
     gameState.hasHadFirstTap = true;
     final bombsToPlace = board.maxBombs;
     final Set<int> bombPositions = {};
+    final Set <int> safePositions = {};
+    
+    // Adicionar célula clicada
+    final tappedPos = tappedY * board.width + tappedX;
+    safePositions.add(tappedPos);
+    
+    // Adicionar os 8 vizinhos (área 3x3)
+    for (int dy = -1; dy <= 1; dy++) {
+      for (int dx = -1; dx <= 1; dx++) {
+        final nx = tappedX + dx;
+        final ny = tappedY + dy;
+        
+        if (nx >= 0 && nx < board.width && ny >= 0 && ny < board.height) {
+          final pos = ny * board.width + nx;
+          safePositions.add(pos);
+        }
+      }
+    }
 
-    while (bombPositions.length < bombsToPlace) {
+    // Gerar bombas fora da área segura
+    while(bombPositions.length < bombsToPlace)
+    {
       final pos = random.nextInt(board.cells.length);
-      // TODO: Lidar com click seguro
+
+      if (safePositions.contains(pos)){
+        continue;
+      }
+
       bombPositions.add(pos);
     }
     for (final pos in bombPositions) {
