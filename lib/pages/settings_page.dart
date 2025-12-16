@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:minesweeper/l10n/app_localizations.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:minesweeper/controller/settings_controller.dart';
+import 'package:minesweeper/repository/settings_repository.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -11,7 +10,11 @@ class SettingsPage extends StatefulWidget {
 }
 
 class SettingsPageState extends State<SettingsPage> {
-  final List<bool> _selecteddificulty = <bool>[true, false, false];
+  final SettingsRepository _settingsRepository = SettingsRepository();
+  GameDifficulty _selectedGameDifficulty = GameDifficulty.easy;
+  List<bool> get _selectedDifficulty => GameDifficulty.values
+      .map((difficulty) => difficulty == _selectedGameDifficulty)
+      .toList();
   bool vertical = false;
 
   final Map<String, List<int>> boardSizes = {
@@ -27,22 +30,24 @@ class SettingsPageState extends State<SettingsPage> {
   }
 
   Future<void> _loadSelectedDifficulty() async {
-    final prefs = await SharedPreferences.getInstance();
-    final savedDifficulty =
-        prefs.getString('selectedDifficulty') ?? 'Fácil 8x8';
-
+    final savedDifficulty = await _settingsRepository.loadDifficulty();
     setState(() {
-      for (int i = 0; i < dificuldades.length; i++) {
-        _selecteddificulty[i] = dificuldades[i] == savedDifficulty;
-      }
+      _selectedGameDifficulty = savedDifficulty;
     });
   }
 
-  Future<void> _saveSelectedDifficulty(String difficulty) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('selectedDifficulty', difficulty);
+  void _saveSelectedDifficulty(int index) {
+    setState(() {
+      for (int i = 0; i < _selectedDifficulty.length; i++) {
+        _selectedDifficulty[i] = i == index;
+      }
+    });
+
+    // Salva a dificuldade selecionada
+    _settingsRepository.saveDifficulty(GameDifficulty.values[index]);
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Configrações'), centerTitle: true),
@@ -66,17 +71,17 @@ class SettingsPageState extends State<SettingsPage> {
                 child: ToggleButtons(
                   direction: vertical ? Axis.vertical : Axis.vertical,
                   onPressed: (int index) {
-                    setState(() {
-                      for (int i = 0; i < _selecteddificulty.length; i++) {
-                        _selecteddificulty[i] = i == index;
-                      }
-                    });
+                    // setState(() {
+                    //   for (int i = 0; i < _selectedDifficulty.length; i++) {
+                    //     _selectedDifficulty[i] = i == index;
+                    //   }
+                    // });
 
-                    _saveSelectedDifficulty(dificuldades[index]);
-                    final selectedBoardSize = boardSizes[dificuldades[index]];
-                    print(
-                      'Tamanho do tabuleiro: ${selectedBoardSize![0]}x${selectedBoardSize[1]}',
-                    );
+                    // _saveSelectedDifficulty(dificuldades[index]);
+                    // final selectedBoardSize = boardSizes[dificuldades[index]];
+                    // print(
+                    //   'Tamanho do tabuleiro: ${selectedBoardSize![0]}x${selectedBoardSize[1]}',
+                    // );
                   },
                   borderRadius: const BorderRadius.all(Radius.circular(8)),
                   selectedBorderColor: Colors.red[700],
@@ -87,8 +92,10 @@ class SettingsPageState extends State<SettingsPage> {
                     minHeight: 40.0,
                     minWidth: 90.0,
                   ),
-                  isSelected: _selecteddificulty,
-                  children: dificuldades.map((e) => Text(e)).toList(),
+                  isSelected: _selectedDifficulty,
+                  children: GameDifficulty.values
+                      .map((e) => Text(e.name))
+                      .toList(),
                 ),
               ),
             ],

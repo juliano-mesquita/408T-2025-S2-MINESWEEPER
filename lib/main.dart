@@ -4,6 +4,7 @@ import 'package:minesweeper/controller/board_controller.dart';
 import 'package:minesweeper/l10n/app_localizations.dart';
 import 'package:minesweeper/pages/game_menu.dart';
 import 'package:minesweeper/states/game_state.dart';
+import 'package:minesweeper/repository/settings_repository.dart';
 
 void main() {
   registerDependencies();
@@ -14,7 +15,7 @@ void registerDependencies() {
   final getIt = GetIt.instance;
   getIt.registerSingleton<GameState>(GameState());
   getIt.registerSingleton<BoardController>(BoardController());
-  //TODO: Register settingsController & call init
+  getIt.registerSingleton<SettingsRepository>(SettingsRepository());
 }
 
 class MyApp extends StatelessWidget {
