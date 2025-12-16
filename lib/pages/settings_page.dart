@@ -71,17 +71,17 @@ class SettingsPageState extends State<SettingsPage> {
                 child: ToggleButtons(
                   direction: vertical ? Axis.vertical : Axis.vertical,
                   onPressed: (int index) {
-                    // setState(() {
-                    //   for (int i = 0; i < _selectedDifficulty.length; i++) {
-                    //     _selectedDifficulty[i] = i == index;
-                    //   }
-                    // });
+                    setState(() {
+                      for (int i = 0; i < _selectedDifficulty.length; i++) {
+                        _selectedDifficulty[i] = i == index;
+                      }
+                    });
 
-                    // _saveSelectedDifficulty(dificuldades[index]);
-                    // final selectedBoardSize = boardSizes[dificuldades[index]];
-                    // print(
-                    //   'Tamanho do tabuleiro: ${selectedBoardSize![0]}x${selectedBoardSize[1]}',
-                    // );
+                    _saveSelectedDifficulty(dificuldades[index]);
+                    final selectedBoardSize = boardSizes[dificuldades[index]];
+                    print(
+                      'Tamanho do tabuleiro: ${selectedBoardSize![0]}x${selectedBoardSize[1]}',
+                    );
                   },
                   borderRadius: const BorderRadius.all(Radius.circular(8)),
                   selectedBorderColor: Colors.red[700],
