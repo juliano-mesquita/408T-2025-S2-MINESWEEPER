@@ -31,4 +31,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get titleVictory => 'Victory';
+
+  @override
+  String get labelDifficultyHard => 'Díficil';
 }

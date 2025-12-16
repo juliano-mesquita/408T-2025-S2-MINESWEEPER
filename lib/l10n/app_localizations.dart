@@ -145,6 +145,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Victory!'**
   String get titleVictory;
+
+  /// No description provided for @labelDifficultyHard.
+  ///
+  /// In en, this message translates to:
+  /// **'Hard'**
+  String get labelDifficultyHard;
 }
 
 class _AppLocalizationsDelegate

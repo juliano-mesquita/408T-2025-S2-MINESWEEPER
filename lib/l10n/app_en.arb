@@ -13,6 +13,8 @@
   "titleGameOver": "Game Over",
   "btnGoMainMenu": "Go back to main menu",
 
-  "titleVictory": "Victory!"
+  "titleVictory": "Victory!",
+
+  "labelDifficultyHard": "Hard"
 
 }
