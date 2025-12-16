@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:minesweeper/controller/board_controller.dart';
 import 'package:minesweeper/states/game_state.dart';
 import 'package:minesweeper/states/game_working_state.dart';
-import 'package:minesweeper/widget/cell_widget.dart';
+import 'package:minesweeper/widgets/cell_widget.dart';
 import 'package:watch_it/watch_it.dart';
 
 class MineSweeperBoardWidget extends StatefulWidget with WatchItStatefulWidgetMixin {
@@ -30,6 +30,13 @@ class MineSweeperBoardWidgetState extends State<MineSweeperBoardWidget>
   }
 
   void revealCell(int index) {
+    final cell = gameState.board!.cells[index];
+
+    if(cell.isFlagged)
+    {
+      return;
+    }
+
     final x = index % gameState.board!.width;
     final y = index ~/ gameState.board!.width;
     boardController.openAt(x, y);
