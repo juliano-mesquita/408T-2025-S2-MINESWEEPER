@@ -49,7 +49,7 @@ class GamePageState extends State<GamePage> {
                         Navigator.of(context).pop();
                       },
                       icon: const Icon(Icons.exit_to_app),
-                      label: Text(AppLocalizations.of(context)!.btnGoMainMenu),
+                      label: Text(AppLocalizations.of(context)!.btnLeave),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.redAccent,
                         foregroundColor: Colors.white,

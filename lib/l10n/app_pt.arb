@@ -9,5 +9,7 @@
     "titleGameOver": "Game Over",
     "btnGoMainMenu": "Voltar ao menu principal",
 
-    "titleVictory": "Victory"
+    "titleVictory": "Victory",
+
+    "btnLeave": "Sair"
 }

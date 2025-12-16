@@ -145,6 +145,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Victory!'**
   String get titleVictory;
+
+  /// No description provided for @btnLeave.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave'**
+  String get btnLeave;
 }
 
 class _AppLocalizationsDelegate
