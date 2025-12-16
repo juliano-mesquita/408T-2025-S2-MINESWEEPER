@@ -31,4 +31,19 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get titleVictory => 'Victory';
+
+  @override
+  String get labelDifficultyHard => 'Díficil';
+
+  @override
+  String get labelDifficultyMedium => 'Médio';
+
+  @override
+  String get labelDifficultyEasy => 'Fácil';
+
+  @override
+  String get labelDifficultySelector => 'Selecione o Nível de Dificuldade';
+
+  @override
+  String get labelSettings => 'Configurações';
 }

@@ -5,20 +5,25 @@ import 'package:minesweeper/controller/game_controller.dart';
 import 'package:minesweeper/l10n/app_localizations.dart';
 import 'package:minesweeper/pages/game_menu.dart';
 import 'package:minesweeper/states/game_state.dart';
+import 'package:minesweeper/repository/settings_repository.dart';
 
-void main() {
-  registerDependencies();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await registerDependencies();
   runApp(const MyApp());
 }
 
-void registerDependencies() {
+Future<void> registerDependencies() async {
   final getIt = GetIt.instance;
   getIt.registerSingleton<GameState>(GameState());
   getIt.registerSingleton<BoardController>(BoardController());
-  getIt.registerSingleton<GameController>(
-    GameController()..init(),
-    dispose: (instance) => instance.dispose() 
-  );
+  getIt.registerSingleton<SettingsRepository>(SettingsRepository());
+  getIt.registerSingletonAsync<GameController>(() async {
+    final instance = GameController();
+    await instance.init();
+    return instance;
+  }, dispose: (instance) => instance.dispose());
+  await getIt.allReady();
 }
 
 class MyApp extends StatelessWidget {
