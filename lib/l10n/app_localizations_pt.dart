@@ -22,4 +22,13 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get titleBoard => 'Tabuleiro!';
+
+  @override
+  String get titleGameOver => 'Game Over';
+
+  @override
+  String get btnGoMainMenu => 'Voltar ao menu principal';
+
+  @override
+  String get titleVictory => 'Victory';
 }

@@ -4,5 +4,10 @@
     "btnStartGame": "Inicio do jogo!",
     "btnSettings": "Configurações!",
     "btnRankings": "Rankings!",
-    "titleBoard": "Tabuleiro!"
+    "titleBoard": "Tabuleiro!",
+
+    "titleGameOver": "Game Over",
+    "btnGoMainMenu": "Voltar ao menu principal",
+
+    "titleVictory": "Victory"
 }

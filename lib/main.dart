@@ -15,7 +15,10 @@ void registerDependencies() {
   final getIt = GetIt.instance;
   getIt.registerSingleton<GameState>(GameState());
   getIt.registerSingleton<BoardController>(BoardController());
-  getIt.registerSingleton<GameController>(GameController());
+  getIt.registerSingleton<GameController>(
+    GameController()..init(),
+    dispose: (instance) => instance.dispose() 
+  );
 }
 
 class MyApp extends StatelessWidget {

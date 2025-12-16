@@ -30,7 +30,6 @@ class BoardController {
     );
 
     gameState.board = board;
-    gameState.gameWorkingState = GameWorkingState.playing;
   }
 
   /// Starts opening the board at position [x], [y]
@@ -48,7 +47,6 @@ class BoardController {
       _placeBombs(x, y);
     }
     _openCell(board, y, x);
-
     // Update board data
     gameState.board = board;
   }

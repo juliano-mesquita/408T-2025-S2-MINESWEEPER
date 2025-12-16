@@ -127,6 +127,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Board!'**
   String get titleBoard;
+
+  /// No description provided for @titleGameOver.
+  ///
+  /// In en, this message translates to:
+  /// **'Game Over'**
+  String get titleGameOver;
+
+  /// No description provided for @btnGoMainMenu.
+  ///
+  /// In en, this message translates to:
+  /// **'Go back to main menu'**
+  String get btnGoMainMenu;
+
+  /// No description provided for @titleVictory.
+  ///
+  /// In en, this message translates to:
+  /// **'Victory!'**
+  String get titleVictory;
 }
 
 class _AppLocalizationsDelegate

@@ -50,11 +50,10 @@ class MineSweeperBoardWidgetState extends State<MineSweeperBoardWidget>
           int lines = (availableHeight / widget.cellSize).floor();
           int totalCells = lines * columns;
 
-          if (gameState.gameWorkingState == GameWorkingState.notStarted) {
+          if (gameState.gameWorkingState == GameWorkingState.notStarted && gameState.board == null) {
             WidgetsBinding.instance.addPostFrameCallback(
               (_)
               {
-                gameState.gameWorkingState = GameWorkingState.playing;
                 boardController.initializeBoard(columns, lines);
               }
             );
@@ -62,6 +61,11 @@ class MineSweeperBoardWidgetState extends State<MineSweeperBoardWidget>
             // Como não temos uma tela neste momento(ainda não inicializou)
             // podemos retornar um SizedBox sem tamanho
             return SizedBox();
+          }
+
+          if(gameState.board == null)
+          {
+            return const SizedBox();
           }
 
           final board = gameState.board!;
