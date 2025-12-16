@@ -46,4 +46,5 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get labelSettings => 'Settings';
+  String get btnLeave => 'Leave';
 }

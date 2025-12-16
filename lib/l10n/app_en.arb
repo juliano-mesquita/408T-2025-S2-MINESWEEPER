@@ -23,6 +23,7 @@
 
   "labelDifficultySelector": "Select the difficulty level",
 
-  "labelSettings": "Settings"
+  "labelSettings": "Settings",
+  "btnLeave": "Leave"
 
 }
