@@ -22,4 +22,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get titleBoard => 'Board!';
+
+  @override
+  String get titleGameOver => 'Game Over';
+
+  @override
+  String get btnGoMainMenu => 'Go back to main menu';
+
+  @override
+  String get titleVictory => 'Victory!';
 }

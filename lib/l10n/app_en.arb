@@ -8,6 +8,11 @@
   "btnStartGame": "Start game!",
   "btnSettings": "Game Settings!",
   "btnRankings": "Game Rankings!",
-  "titleBoard": "Board!"
+  "titleBoard": "Board!",
+
+  "titleGameOver": "Game Over",
+  "btnGoMainMenu": "Go back to main menu",
+
+  "titleVictory": "Victory!"
 
 }
